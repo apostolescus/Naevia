@@ -1,1 +1,8 @@
+# User interface
+user-interface/node_modules
+
+# Backend
+backend/__pycache__
+
+# IDE
 .vscode
