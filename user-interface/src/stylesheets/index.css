@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css?family=Exo:300,400,700");
+
+*{
+    margin: 0px;
+    padding: 0px;
+    outline: 0 !important;
+    box-shadow: none !important;
+}
+
+*:focus{
+    outline: 0 !important;
+}
+
+body{
+    font-family: "Exo", sans-serif;
+}

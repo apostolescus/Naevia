@@ -1,67 +1,73 @@
 # Naevia
 
+## Description
 
-### decrypter.py
+**Naevia** is a platform demonstrating the usage of the **Hill Climbing** optimization technique (only for local optima solutions) and **N-grams frequency** for **cryptanalysis**. Its functionalities, which are available through a web interface, are:
+- encryption with classic ciphers:
+  - Caesar;
+  - Vigenere;
+  - substitution;
+- decryption via:
+  - brute-force;
+  - Hill Climbing.
 
-Decypter class can perform the following opperations:
-1. *decrypt Vigenere ciphertext with given key length using hill-climbing algorithm*
-2. *decrypt Caesar ciphertext using brute force*
-3. *decrypt Substitution ciphertext using brute force (not recommended)*
-4. *decrypt Substitution ciphertext using hill-climbing algorithm*
+### Observations
 
-Decrypt uses quadgrams for heuristic calculation.
-#### How to use
+To improve the convergence to the solution (the real plaintext), the following **preliminary steps** can be done:
+- running the decryption multiple time (it starts at each run from a different random value, maybe God will have mercy on you once);
+- increase ciphertext size (*if possible*); and
+- shorten key length (*if possible*).
 
-First of all create an object of decrypter class.
-When initializating the object you should provide the text you want to decrypt.
+Limitations of the current version of the platform are some fixed parameters:
+- the N-grams length (`4`);
+- the number of keys generated into the brute-force process (`3500`); and
+- the length of the Vigenere key that is brute-forced (`12`).
 
-        from decrypter.py import decrypter
-        
-        dc = decrypter("Fbylk ioeqs iudbj ozq")
-        
-In order to decrypt the text you should call one of the following methods:
-brute_force_decrypt() or hillclimbing_decrypt().
-    
-**brute_force_decrypt(algorithm_name)** where:
-* algorithm_name : caesar or sub (for substitution)
+### Demos
 
-**hillclimbing_decrypt(algorithm, key_len, boost):intermediate_list** where:
-* algorithm : vig or sub
-* key_len: vigenere key length; it is set by default to 4
-* boost: boolean value; set by default to False
-    Boost allows to increase the randomness of the new generated keys. This means that you can descend faster, with bigger steps, but with lower precision. 
-* returns all the keys and their heuristics
+1. [Encryption with the substitution cipher. Decryption via brute-foce](others/demos/bruteforce/substitution.mp4)
+2. [Encryption with the Caesar cipher. Decryption via Hill Climbing](others/demos/hill_climbing/caesar.mp4)
+3. [Encryption with the Vigenere cipher. Decryption via Hill Climbing](others/demos/hill_climbing/caesar.mp4)
+4. [Encryption with the substitution cipher. Decryption via Hill Climbing](others/demos/hill_climbing/caesar.mp4)
 
-The  decrypted object stores the following:
-1. decrypted text (*object.decrypted*)
-2. lowest heuristic (*object.best_score*)
-3. list with all keys and heuristics (*object.intermediate_list*)
-4. final key (*object.key*)
+## Setup
 
-### Example
-    
-        dc = decrypter("cypher_text")
-        dc.bruteforce_decrypt("caesar")
-        print("text is: ", dc.decrypted)
-        
-OR
-        
-        dc = decrypter("cipher_text ")
-        dc.hillclimbing_decrypt("vig", key_len = 6)
-        print("key is:", dc.key)
-        
-### Didn't find the key?
+1. install [Python3](https://www.python.org/downloads/) and [Node.js](https://nodejs.org/en/download/)
+2. set up and run the server
 
-Given the fact that the algorithm finds the local minimum, it may not find the correct key on the first try.
-It is recomended to run it multiple times because it always starts with a random value, thus increasing the chances of finding the right key.
-In order to improve key detection try the following:
-* increase cipher text size
-* shorten key length (if possible)
-* run it multiple times (maybe God will have mercy on you once)
+```
+cd backend
+pip3 install -r requirements.txt
+python3 server.py
+```
 
+3. set up and run the user interface
 
+```
+cd user-interface
+npm install
+npm start
+```
 
-### Futher implementations
-* brute force for vigenere
-* monograms heuristic
-* allow for more parameter tuning
+## Resources
+
+### User Interface
+
+- [React](https://reactjs.org/)
+- [React Bootstrap](https://react-bootstrap.github.io/)
+- [axios](https://github.com/axios/axios)
+- [Victory](https://formidable.com/open-source/victory/)
+- [React Icons](https://react-icons.github.io/react-icons)
+- logo from [Icons8](https://icons8.com/)
+- background animation from [CodePen](https://codepen.io/mohaiman/pen/MQqMyo)
+
+### Backend
+
+- [Python3](https://www.python.org/)
+- [Flask](https://flask.palletsprojects.com/en/1.1.x/)
+- [Flask-CORS](https://flask-cors.readthedocs.io/en/latest/)
+
+## Further Improvements
+
+- [ ] solving the above mentioned limitations
+- [ ] more parameter tuning
