@@ -1,5 +1,7 @@
 # User interface
 user-interface/node_modules
+user-interface/.eslintcache
+user-interface/package-lock.json
 
 # Backend
 backend/__pycache__
